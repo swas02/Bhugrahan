@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <title>DXF Converter</title>
+  <link rel="stylesheet" href="https://unpkg.com/@blueprintjs/core@5.1.0/lib/css/blueprint.css" />
+  <link rel="stylesheet" href="https://unpkg.com/@blueprintjs/icons@5.1.0/lib/css/blueprint-icons.css" />
+  <script type="module" crossorigin src="./assets/index-Cq11EKNP.js"></script>
+  <link rel="stylesheet" crossorigin href="./assets/index-C35s-qGA.css">
+</head>
+
+<body>
+  <div id="viewerContainer">
+    <div class="top-bar">
+      <h3 style="margin: 0;">DXF Converter</h3>
+    </div>
+
+    <div class="left-toolbar bp5-dark">
+      <button id="importBtn" class="bp5-button bp5-minimal bp5-icon-add" title="Import DXF"></button>
+      <input type="file" id="fileInput" accept=".dxf" style="display: none;" />
+
+      <button id="exportBtn" class="bp5-button bp5-minimal bp5-icon-download" title="Export Scene"></button>
+
+      <hr style="width: 80%; border-color: #444; margin: 10px 0;">
+
+      <a href="/index.html" class="bp5-button bp5-minimal bp5-icon-code" target="_self"
+        title="Go to DXF JSON Viewer"></a>
+
+      <a href="/help.html" class="bp5-button bp5-minimal bp5-icon-help" target="_blank"
+        title="Open Help Documentation"></a>
+
+    </div>
+
+    <div class="status-bar" id="statusBar">Ready.</div>
+  </div>
+
+  <details id="layerPanel" open>
+    <summary>Layers</summary>
+    <div id="layerList">No layers loaded.</div>
+  </details>
+
+  <script>
+    const importBtn = document.getElementById("importBtn");
+    const fileInput = document.getElementById("fileInput");
+    importBtn.addEventListener("click", () => fileInput.click());
+    fileInput.addEventListener("change", (e) => {
+      const file = e.target.files[0];
+      if (file) {
+        console.log("Selected file:", file.name);
+      }
+    });
+  </script>
+</body>
+
+</html>

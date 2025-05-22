@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>DXF JSON Viewer Help</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #f4f4f4;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1, h2, h3 {
+            color: #0056b3;
+            border-bottom: 2px solid #eee;
+            padding-bottom: 5px;
+            margin-top: 25px;
+        }
+        h1 {
+            text-align: center;
+            border-bottom: none;
+            padding-bottom: 0;
+            color: #007bff;
+        }
+        ul {
+            list-style-type: disc;
+            margin-left: 20px;
+            padding-left: 0;
+        }
+        li {
+            margin-bottom: 8px;
+        }
+        .code-snippet {
+            background-color: #e9e9e9;
+            border: 1px solid #ddd;
+            border-left: 5px solid #007bff;
+            padding: 10px 15px;
+            margin: 15px 0;
+            font-family: 'Consolas', 'Monaco', monospace;
+            font-size: 0.9em;
+            overflow-x: auto;
+            border-radius: 4px;
+        }
+        .note {
+            background-color: #fff3cd;
+            color: #856404;
+            border: 1px solid #ffeeba;
+            border-left: 5px solid #ffc107;
+            padding: 10px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+        .key-action {
+            font-weight: bold;
+            color: #007bff;
+        }
+        .footer-text {
+            text-align: center;
+            margin-top: 40px;
+            font-size: 0.9em;
+            color: #666;
+            line-height: 1.8;
+        }
+        .tech-stack {
+            font-weight: bold;
+            color: #007bff;
+        }
+    </style>
+</head>
+<body>
+    <h1>DXF JSON Viewer Help</h1>
+
+    <p>Welcome to the DXF JSON Viewer! This tool allows you to load, view, and annotate 2D drawing data exported from CAD software in JSON format.</p>
+
+    <h2>Getting Started</h2>
+    <ul>
+        <li><strong>📂 Open File:</strong> Click this button to load a drawing. The viewer supports:
+            <ul>
+                <li><code>.json</code>: Standard Three.js JSON scene files.</li>
+                <li><code>.gz</code> / <code>.json.gz</code>: Gzipped Three.js JSON scene files.</li>
+                <li><code>.dxfhs.gz</code>: Custom gzipped archives containing both the Three.js scene data and saved hotspot configurations (recommended for saving your work).</li>
+            </ul>
+        </li>
+        <li><strong>Fit View:</strong> Centers the camera on the loaded drawing, adjusting the zoom to fit it entirely within the viewport.</li>
+    </ul>
+
+    <h2>Generating Scene Files from DXF</h2>
+    <p>To view your DXF drawings in this application, you first need to convert them into the Three.js JSON scene format (<code>.json</code> or <code>.json.gz</code>).</p>
+    <p>Please use our dedicated converter application, available at: <a href="/Editor/index.html">/Editor/index.html</a></p>
+    <p>Load your DXF file in the converter, then export it as a Three.js JSON scene. You can then load that exported JSON file into this viewer.</p>
+
+    <h2>Drawing Hotspots (Areas)</h2>
+    <ul>
+        <li><strong>Draw Area:</strong> Click this button to activate the polygon drawing mode.
+            <ul>
+                <li><span class="key-action">Left-Click:</span> Add points to define your polygon's shape.</li>
+                <li><span class="key-action">Snapping:</span> The tool automatically snaps to existing vertices of the loaded drawing as you move your mouse, ensuring precision.</li>
+                <li><span class="key-action">Click 1st point:</span> Click near your very first point to automatically close and complete the polygon.</li>
+                <li><span class="key-action">Enter Key:</span> Press <span class="key-action">Enter</span> to complete the polygon at any time (it will automatically close the polygon by connecting the last point to the first).</li>
+                <li><span class="key-action">Esc Key:</span> Press <span class="key-action">Esc</span> to cancel the current drawing without saving.</li>
+                <li><span class="key-action">Ctrl+Z / Cmd+Z:</span> Press <span class="key-action">Ctrl+Z</span> (Windows) or <span class="key-action">Cmd+Z</span> (Mac) to undo the last drawn point.</li>
+            </ul>
+        </li>
+    </ul>
+
+    <h2>Saving Hotspot Details</h2>
+    <p>Once a polygon is completed (by clicking the first point or pressing Enter), a "Save Room Hotspot" modal will appear:</p>
+    <ul>
+        <li><strong>Room ID:</strong> Enter a unique identifier for your hotspot. This ID must not already exist.</li>
+        <li><strong>Z-Level:</strong> Set the Z-coordinate for your hotspot.
+            <ul>
+                <li>The main drawing is located at <span class="key-action">Z=1</span>.</li>
+                <li>Enter a value <span class="key-action">less than 1</span> (e.g., 0.5, 0.0, -0.1) to place the hotspot <span class="key-action">behind</span> the main drawing.</li>
+                <li>Enter a value <span class="key-action">greater than 1</span> (e.g., 1.5, 2.0) to place the hotspot <span class="key-action">in front</span> of the main drawing.</li>
+            </ul>
+        </li>
+        <li><strong>Room Type:</strong> Select a predefined category for your hotspot (e.g., Classroom, Lab, Office).</li>
+        <li><strong>Custom Color:</strong> If "Unspecified" is selected as the Room Type, a color picker will appear, allowing you to choose a custom color for the hotspot.</li>
+        <li><strong>Opacity:</strong> Use the slider to set the transparency of your hotspot (0.0 for fully transparent, 1.0 for fully opaque).</li>
+        <li><strong>Save:</strong> Saves the hotspot with the entered details.</li>
+        <li><strong>Delete:</strong> Discards the drawn polygon if you don't wish to save it.</li>
+    </ul>
+
+    <h2>Managing Hotspots List</h2>
+    <ul>
+        <li><strong>Show Rooms List:</strong> Opens a full-window list of all saved room hotspots.
+            <ul>
+                <li><strong>Show Checkbox:</strong> Toggle visibility of individual hotspots in the viewer. Checking a hotspot will also fit the camera to its location.</li>
+                <li><strong>Room ID, Type, Details:</strong> Displays the saved information for each hotspot. For "Unspecified" types with a custom color, the color will be shown in the "Details" column.</li>
+                <li><strong>Delete Button:</strong> Permanently removes a hotspot from the list and the viewer.</li>
+            </ul>
+        </li>
+    </ul>
+
+    <h2>Interacting with Hotspots in Viewer</h2>
+    <ul>
+        <li><strong>Hover:</strong> Moving your mouse over a hotspot will highlight it and display its Room ID, Type, and Opacity in the "Hotspot Info Box".</li>
+        <li><strong>Click:</strong> Clicking a hotspot will select it (highlighting it more prominently) and update its information in the "Hotspot Info Box". Clicking on empty space will clear the selection.</li>
+    </ul>
+
+    <h2>Exporting Your Scene</h2>
+    <ul>
+        <li><strong>Export Scene:</strong> Exports your current loaded drawing along with all your defined hotspots into a single <code>.dxfhs.gz</code> file. This file can be reloaded later to restore your work.
+            <ul>
+                <li>All hotspots will be exported as visible, regardless of their current checkbox state, to ensure a complete scene is saved.</li>
+            </ul>
+        </li>
+    </ul>
+
+    <h2>Getting Your Scene File</h2>
+    <p>Once you click the "Export Scene" button, your browser will automatically download the generated <code>.dxfhs.gz</code> file.</p>
+    <ul>
+        <li>By default, this file will be saved to your browser's configured downloads folder (e.g., "Downloads" on Windows, "Downloads" on macOS/Linux).</li>
+        <li>The filename will be based on the name you entered in the prompt (e.g., <code>MyBuildingPlan_2025-05-23T12-30-00.dxfhs.gz</code>).</li>
+        <li>To use this file with the viewer again, simply click "Open File" and select the downloaded <code>.dxfhs.gz</code> file.</li>
+    </ul>
+
+    <div class="footer-text">
+        <p>Made with &hearts; by <a href="https://github.com/swas02">Swas02</a></p>
+        <p>
+            Technology Stack: <span class="tech-stack">Three.js</span>,
+            <span class="tech-stack">Vite</span>,
+            <span class="tech-stack">JavaScript (ES Modules)</span>,
+            <span class="tech-stack">HTML5</span>,
+            <span class="tech-stack">CSS3</span>,
+            <span class="tech-stack">Pako.js</span>,
+            <span class="tech-stack">fflate</span>
+        </p>
+    </div>
+</body>
+</html>
