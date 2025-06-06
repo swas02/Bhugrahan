@@ -4,11 +4,10 @@
 <head>
     <meta charset=UTF-8>
     <meta name=viewport content="width=device-width,initial-scale=1">
-    <title>Project – भूग्रहण (Bhūgrahaṇ)</title>
-    <script src=https://cdn.jsdelivr.net/npm/pako@2.1.0/dist/pako.min.js></script>
-    <script src=https://cdn.jsdelivr.net/npm/fflate@0.8.0/umd/index.js></script>
-  <script type="module" crossorigin src="./assets/index-ChCilZkt.js"></script>
-  <link rel="stylesheet" crossorigin href="./assets/index-T_Vzfk-z.css">
+    <title>DXF JSON Viewer</title>
+
+  <script type="module" crossorigin src="/assets/index-iVm--a8Z.js"></script>
+  <link rel="stylesheet" crossorigin href="/assets/index-CfnJTxIM.css">
 </head>
 
 <body>
@@ -16,7 +15,7 @@
         <label for=fileInput class=custom-file-input title="Select DXF JSON or gzipped JSON file">
             📂 Open File
         </label>
-        <input type=file id=fileInput accept=".json,.gz,.dxfhs.gz">
+        <input type=file id=fileInput accept=".json,.gz,.dxfhs">
         <button id=drawPolygonButton class=control-button title="Start drawing a new polygon hotspot">Draw Area</button>
         <button id=fitViewButton class=control-button title="Fit camera to loaded object">Fit View</button>
         <button id=showRoomsButton class=control-button title="Show list of drawn room hotspots">Show Rooms
@@ -24,10 +23,11 @@
         <button id=exportSceneButton class=control-button title="Export current scene as gzipped JSON">Export
             Scene</button>
 
-        <a href="./Editor/index.html" class="control-button" target="_blank" title="Go to DXF to Three.js Scene Converter">
+        <a href="/Editor/index.html" class="control-button" target="_blank"
+            title="Go to DXF to Three.js Scene Converter">
             ⚙️ Convert DXF
         </a>
-        <a href="./help.html" class="control-button" target="_blank" title="View Help Documentation">
+        <a href="help.html" class="control-button" target="_blank" title="View Help Documentation">
             ❓ Help
         </a>
 
@@ -68,7 +68,10 @@
                 <option value="Office">Office</option>
             </select>
 
-            <p id="customTypeLabel" style="display: none;">Custom Type Name:</p> <input type="text" id="customTypeInput" placeholder="e.g., Server Room" style="display: none;"> <p id="customColorLabel" style="display: none;">Custom Color (for Unspecified):</p>
+            <p id="customTypeLabel" style="display: none;">Custom Type Name:</p>
+            <input type="text" id="customTypeInput" placeholder="e.g., Server Room" style="display: none;">
+
+            <p id="customColorLabel" style="display: none;">Custom Color (for Unspecified):</p>
             <input type="color" id="customColorInput" value="#00FF00" style="display: none;">
 
             <p id="facultyNameLabel" style="display: none;">Faculty Name (if applicable):</p>
@@ -110,5 +113,4 @@
         </div>
     </div>
 </body>
-
 </html>
